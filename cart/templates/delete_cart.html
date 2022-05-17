@@ -1,0 +1,4 @@
+<form action="{% url 'cart:delete_cart' %}?product_id={{ value.product.id }}&next={{ request.path }}" method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-secondary" value="Удалить">
+</form>

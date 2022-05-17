@@ -1,0 +1,37 @@
+{% extends 'registration/base.html' %}
+
+
+{% block title %}Регистрация{% endblock %}
+
+{% block form %}
+    <div>
+{% if user.is_anonymous %}
+
+{% include 'menu.html' %}
+<form class="form-signin" method="post" action="{% url 'register' %}">
+
+  <input type="hidden" name="next" value="">
+    <a href="{% url 'home' %}">
+        <img class="mb-4" src="/static/HG.jpeg" alt="" width="72" height="72">
+    </a>
+
+    {% csrf_token %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Создать аккаунт</h1>
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email"
+         value="" required="" autofocus="" data-cip-id="inputEmail">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль"
+         name="password" required="" data-cip-id="inputPassword">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Повторите пароль"
+         name="password2" required="" data-cip-id="inputPassword">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Создать</button>
+</form>
+    {% else %}
+    <p class="text-success">{{ user|upper}}, Вы уже зарегистрированы. <br> <a href="{{ '/' }}">Перейти на главную</a></p>
+    {% endif %}
+    {% include 'footer.html' %}
+</div>
+{% endblock %}
